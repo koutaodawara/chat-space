@@ -48,6 +48,7 @@ group :development do
   gem 'erb2haml'
   gem 'bootstrap-sass'
   gem 'devise'
-  gem "font-awesome-rails"
+  gem "font-awesome-sass"
+  gem "devise"
 end
 
