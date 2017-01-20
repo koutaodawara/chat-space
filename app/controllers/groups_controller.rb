@@ -1,15 +1,20 @@
 class GroupsController < ApplicationController
 
+  before_action :authenticate_user!
+  before_action :group_find, only: [:show, :edit, :update, :destroy]
+
   def index
     @groups = Group.all
   end
 
   def new
     @group = Group.new
+    @group.members.build
   end
 
   def create
-    group = Group.new(create_params)
+    group = Group.new(group_params)
+
     if group.save
       redirect_to root_path, notice: "グループを登録しました！"
     else
@@ -20,9 +25,26 @@ class GroupsController < ApplicationController
   def edit
   end
 
+  def update
+    if @group.update(group_params)
+      redirect_to root_path, notice: 'グループを更新しました'
+    else
+      redirect_to edit_group_path, alert: 'もう一度編集してください'
+    end
+  end
+
+
+  def destroy
+    @group.destroy
+    redirect_to root_path, notice: '削除に成功しました'
+  end
+
   private
-  def create_params
-    params.require(:group).permit(:name)
-    ##選択してきたuserをどのように保存するか。attributeを使って登録
+  def group_params
+   params.require(:group).permit(:name, :user_ids=>[])
+  end
+
+  def group_find
+    @group = Group.find(params[:id])
   end
 end
