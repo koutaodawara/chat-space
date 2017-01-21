@@ -1,0 +1,30 @@
+.layout-notification
+  .chat
+    .chat-side
+      .chat-user.clearfix
+        %h5
+          = current_user.name
+        .chat-user__actions
+          = link_to '', new_group_path, class: 'chat-user__action fa fa-pencil-square-o'
+          = link_to '', edit_user_registration_path, class: 'chat-user__action fa fa-cog'
+      %ul.chat-groups
+        =render partial: 'chats/group', collection: @groups
+
+    .chat-main
+      .chat-header.clearfix
+        .chat-header--left
+          %h2
+            = @group.name
+            %p.chat-header__users
+              Members:
+              = render partial: 'chats/member', collection: @group.users, as: 'member'
+        .chat-header--right
+          = link_to 'Edit', edit_group_path(@group.id), class: 'chat-header__edit-btn'
+
+      .chat-body
+        %ul.chat-messages
+          = render partial: 'chats/body', collection: @group.chats, as: 'chat'
+
+      .chat-footer
+        #new_message.new_message
+          = render partial: 'chats/form', locals: { group: @group, chat: @chat }

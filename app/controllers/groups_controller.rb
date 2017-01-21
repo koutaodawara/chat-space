@@ -18,7 +18,7 @@ class GroupsController < ApplicationController
     if group.save
       redirect_to root_path, notice: "グループを登録しました！"
     else
-      redirect_to new_group_path,  alert: 'やりなおし〜'
+      redirect_to new_group_path,  alert: '登録に失敗しました'
     end
   end
 
