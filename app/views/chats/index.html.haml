@@ -26,5 +26,4 @@
           = render partial: 'chats/body', collection: @group.chats, as: 'chat'
 
       .chat-footer
-        #new_message.new_message
-          = render partial: 'chats/form', locals: { group: @group, chat: @chat }
+        = render partial: 'chats/form', locals: { group: @group, chat: @chat }

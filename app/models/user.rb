@@ -7,5 +7,5 @@ class User < ApplicationRecord
   has_many :groups, through: :members
   has_many :members
 
-  validates_presence_of :name
+  validates :name, length: { maximum: 6 }, presence: true
 end
