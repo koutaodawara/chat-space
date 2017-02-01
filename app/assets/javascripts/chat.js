@@ -1,22 +1,42 @@
 $(function() {
   function buildHTML(chat) {
-    var html = $('<p class="chat-message__body">').append(chat.content);
+    var html = (
+      '<li>'+
+      '<div class= "chat-message">' +
+      '<div class= "chat-message__header clearfix">' +
+      '<div class="chat-message__name">' +
+      chat.user_name +
+      '</div>'+
+      '<div class= "chat-message__time">' +
+      chat.created_at +
+      '</div>' +
+      '</div>' +
+      '<p class= "message__body">' +
+      chat.text +
+      '</p>' +
+      '</div>' +
+      '</li>'
+      );
     return html;
   }
 
-  $('.chat-footer__body').on('submit', function(e) {
+  $('.chat-footer__submit').on('click', function(e) {
     e.preventDefault();
-    var textField = $('.chat-footer__body');
+    var textField = $('#message_body');
     var chat = textField.val();
+
     $.ajax({
       type: 'POST',
-      url: '/chats.json',
-      data: 'chat',
+      url: location.href + '.json',
+      data: { chat: {
+        text: chat
+      }},
       dataType: 'json'
     })
     .done(function(data) {
       var html = buildHTML(data);
-      $('.chat-message__body').append(html);
+      console.log(html);
+      $('.chat-messages').append(html);
       textField.val('');
     })
     .fail(function() {

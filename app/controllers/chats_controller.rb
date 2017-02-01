@@ -9,14 +9,13 @@ before_action :find_group, only: [:index, :create]
 
   def create
     chat = Chat.new(chat_params)
-    respond_to do |format|
-      if chat.save
-        format.html {redirect_to group_chats_path(@group)}
-        format.json {render json: {chat: {text: @chat.text}}}
-      else
-        format.html {redirect_to group_chats_path(@group), alert: '投稿に失敗しました'}
-        format.json {render json: {message: {text: @message.text}}}
+    if chat.save
+      respond_to do |format|
+        format.html { redirect_to group_chats_path(@group) }
+        format.json { render json: chat.chat_json}
       end
+    else
+      redirect_to group_chats_path(@group), alert: '投稿に失敗しました'
     end
   end
 
