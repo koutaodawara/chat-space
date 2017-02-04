@@ -35,7 +35,6 @@ $(function() {
     })
     .done(function(data) {
       var html = buildHTML(data);
-      console.log(html);
       $('.chat-messages').append(html);
       textField.val('');
     })

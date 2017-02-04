@@ -13,21 +13,26 @@ class GroupsController < ApplicationController
   end
 
   def create
-    group = Group.new(group_params)
+    @group = Group.new(group_params)
 
-    if group.save
-      redirect_to group_chats_path(group.id), notice: "グループを登録しました！"
-    else
-      redirect_to new_group_path,  alert: '登録に失敗しました'
+    respond_to do |format|
+      if @group.save
+        format.html {redirect_to group_chats_path(@group.id), notice: 'グループを投稿しました'}
+        format.json {render json: {chat: {text: @chat.text}}}
+      else
+        format.html {redirect_to new_group_path, alert: '投稿に失敗しました'}
+        format.json {render json: {chat: {text: @message.text}}}
+      end
     end
   end
 
   def edit
+    @users = @group.users
   end
 
   def update
     if @group.update(group_params)
-      redirect_to root_path, notice: 'グループを更新しました'
+      redirect_to group_chats_path(@group.id), notice: 'グループを更新しました'
     else
       redirect_to edit_group_path, alert: 'もう一度編集してください'
     end

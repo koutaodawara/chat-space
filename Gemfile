@@ -69,5 +69,7 @@ group :production do
   gem 'unicorn'
 end
 
+gem 'jquery-turbolinks'
+
 
 
