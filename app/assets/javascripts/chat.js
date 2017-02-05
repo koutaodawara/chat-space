@@ -1,6 +1,13 @@
 $(function() {
   function buildHTML(chat) {
-    var html = (
+
+    if (chat.image) {
+      var image = '<img src=' + chat.image.image.url + ' width="300" height="300" >'
+    } else {
+      var image = ""
+    }
+
+    var html =
       '<li>'+
       '<div class= "chat-message">' +
       '<div class= "chat-message__header clearfix">' +
@@ -13,24 +20,24 @@ $(function() {
       '</div>' +
       '<p class= "message__body">' +
       chat.text +
-      '</p>' +
+      '</p>'+
+      image +
       '</div>' +
-      '</li>'
-      );
+      '</li>';
     return html;
-  }
+  };
 
   $('.chat-footer__submit').on('click', function(e) {
     e.preventDefault();
     var textField = $('#message_body');
-    var chat = textField.val();
+
 
     $.ajax({
       type: 'POST',
       url: location.href + '.json',
-      data: { chat: {
-        text: chat
-      }},
+      data: new FormData($(".new_chat")[0]),
+      processData: false,
+      contentType: false,
       dataType: 'json'
     })
     .done(function(data) {

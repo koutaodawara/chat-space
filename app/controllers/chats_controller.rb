@@ -21,7 +21,7 @@ before_action :find_group, only: [:index, :create]
 
   private
   def chat_params
-    params.require(:chat).permit(:text).merge(group_id: params[:group_id], user_id: current_user.id)
+    params.require(:chat).permit(:text, :image).merge(group_id: params[:group_id], user_id: current_user.id)
   end
 
   def find_group

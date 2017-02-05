@@ -6,3 +6,5 @@
       = chat.created_at
   .chat-message__body
     = chat.text
+    %p
+    = image_tag(chat.image, width: 300, height: 300)

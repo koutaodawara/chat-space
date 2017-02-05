@@ -70,6 +70,6 @@ group :production do
 end
 
 gem 'jquery-turbolinks'
-
+gem 'carrierwave'
 
 
