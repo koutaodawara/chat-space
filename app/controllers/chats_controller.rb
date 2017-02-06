@@ -5,6 +5,12 @@ before_action :find_group, only: [:index, :create]
   def index
     @groups = current_user.groups.includes(:users)
     @chat = Chat.new
+    @chats = @group.chats.includes(:user)
+    respond_to do |format|
+      format.any
+      format.json { render json: @chats.map { |chat| chat.chat_json } }
+    end
+
   end
 
   def create

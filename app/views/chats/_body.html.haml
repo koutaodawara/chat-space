@@ -7,4 +7,4 @@
   .chat-message__body
     = chat.text
     %p
-    = image_tag(chat.image, width: 300, height: 300)
+    = image_tag(chat.image, width: 300, height: 300)  unless chat.image.blank?

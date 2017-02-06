@@ -2,7 +2,7 @@
   .chat-footer__body
     = f.text_area :text, placeholder: "type a message", id: 'message_body'
     %label.chat-footer__file
-      = f.file_field :image
+      = f.file_field :image, id: 'message_image'
       %i.fa.fa-image
   =f.submit 'Send', class: "chat-footer__submit"
 

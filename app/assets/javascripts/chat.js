@@ -1,28 +1,29 @@
 $(function() {
   function buildHTML(chat) {
+    var image_url = chat.image.image.url
 
-    if (chat.image) {
-      var image = '<img src=' + chat.image.image.url + ' width="300" height="300" >'
+    if (!image_url) {
+     var image = ""
     } else {
-      var image = ""
+     var image = '<img src=' + image_url + ' width="300" height="300" >'
     }
 
     var html =
-      '<li>'+
-      '<div class= "chat-message">' +
+      '<li>'                                         +
+      '<div class= "chat-message">'                  +
       '<div class= "chat-message__header clearfix">' +
-      '<div class="chat-message__name">' +
-      chat.user_name +
-      '</div>'+
-      '<div class= "chat-message__time">' +
-      chat.created_at +
-      '</div>' +
-      '</div>' +
-      '<p class= "message__body">' +
-      chat.text +
-      '</p>'+
-      image +
-      '</div>' +
+      '<div class="chat-message__name">'             +
+      chat.user_name                                 +
+      '</div>'                                       +
+      '<div class= "chat-message__time">'            +
+      chat.created_at                                +
+      '</div>'                                       +
+      '</div>'                                       +
+      '<p class= "message__body">'                   +
+      chat.text                                      +
+      '</p>'                                         +
+      image                                          +
+      '</div>'                                       +
       '</li>';
     return html;
   };
@@ -30,6 +31,7 @@ $(function() {
   $('.chat-footer__submit').on('click', function(e) {
     e.preventDefault();
     var textField = $('#message_body');
+    var fileField = $('#message_image');
 
 
     $.ajax({
@@ -44,9 +46,25 @@ $(function() {
       var html = buildHTML(data);
       $('.chat-messages').append(html);
       textField.val('');
+      fileField.val('');
     })
     .fail(function() {
       alert('error');
     });
   });
+
+  setInterval(function(){
+    $.ajax({
+      type: 'GET',
+      url: location.href + '.json',
+      dataType: 'json'
+    })
+    .done(function(data){
+      console.log(data);
+      data.forEach(function(chat){
+        buildHTML(chat);
+      })
+    })
+
+  }, 4000)
 });
