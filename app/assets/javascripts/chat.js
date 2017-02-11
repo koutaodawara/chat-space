@@ -53,6 +53,7 @@ $(function() {
     });
   });
 
+// ここにchatのurlしか動かないように設定してあげる.もしくは、stubを使用し特定のjsファイルしか読めないようにする。
   setInterval(function(){
     $.ajax({
       type: 'GET',
