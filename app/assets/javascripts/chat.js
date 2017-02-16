@@ -53,7 +53,7 @@ $(function() {
     });
   });
 
-// ここにchatのurlしか動かないように設定してあげる.もしくは、stubを使用し特定のjsファイルしか読めないようにする。
+// ここにchatのurlしか動かないように設定してあげる.もしくは、stubを使用し特定のjsファイルしか読めないようにする。またはlengthメソッドで実装できる
   setInterval(function(){
     $.ajax({
       type: 'GET',
