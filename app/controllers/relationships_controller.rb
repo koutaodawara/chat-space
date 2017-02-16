@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-    
+    # somethig
   end
 
 private
