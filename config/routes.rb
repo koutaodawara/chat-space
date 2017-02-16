@@ -4,5 +4,11 @@ Rails.application.routes.draw do
   resources :groups do
     resources :chats, only: [:index, :create]
   end
-  resources :users, only: :index
+  resources :users, only: [:index, :show] do
+    member do
+      get :followed, :followers
+    end
+  end
+
+  resources :relationships, only: [:create, :delete]
 end
