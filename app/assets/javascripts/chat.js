@@ -55,17 +55,22 @@ $(function() {
 
 // ここにchatのurlしか動かないように設定してあげる.もしくは、stubを使用し特定のjsファイルしか読めないようにする。またはlengthメソッドで実装できる
   setInterval(function(){
-    $.ajax({
+    var chatLength = $(".chat-message").length
+    if (chatLength != 0){
+      $.ajax({
       type: 'GET',
       url: location.href + '.json',
       dataType: 'json'
-    })
-    .done(function(data){
-      console.log(data);
-      data.forEach(function(chat){
-        buildHTML(chat);
       })
-    })
-
+      .done(function(data){
+        console.log(data);
+        data.forEach(function(chat){
+          buildHTML(chat);
+        })
+      })
+      .fail(function() {
+        alert('error');
+      });
+    }
   }, 4000)
 });
