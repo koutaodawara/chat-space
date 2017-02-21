@@ -11,7 +11,8 @@ class RelationshipsController < ApplicationController
   end
 
 private
-def follow_params
-  params.require(:relationship).permit(:followed_id)
-end
+
+  def follow_params
+    params.require(:relationship).permit(:followed_id)
+  end
 end
