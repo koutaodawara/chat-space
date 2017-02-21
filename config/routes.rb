@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'groups#index'
   resources :groups do
-    resources :chats, only: %i(index creat)
+    resources :chats, only: %i(index create)
   end
   resources :users, only: %i(index show) do
     member do

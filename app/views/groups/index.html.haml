@@ -9,12 +9,12 @@
           = link_to '', edit_user_registration_path, class: 'chat-user__action fa fa-cog'
       %ul.chat-groups
         - @groups.each do |group|
-          =link_to group_chats_path(group.id) do
+          = link_to group_chats_path(group.id) do
             %li.chat-group.chat-group__link
               %p.chat-group__name
-                = group.name
+                = group.try(:name)
               .chat-group__message
                 - if group.chats.blank?
                   %p まだメッセージはありません
                 -else
-                  = group.chats.last.text
+                  = group.chats.last
