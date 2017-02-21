@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def index
-    @users_except_current_user = User.where('name LIKE(?)', "#{params[:input]}%").where.not(id: current_user.id)
+    @users_except_current_user = User.where('name LIKE(?)', "#{params[:input]}%")
     respond_to do |format|
       format.html{ redirect_to users_path }
-      format.json{ render json: @users_except_current_user}
+      format.json{ render json:  @users_except_current_user }
     end
   end
 
