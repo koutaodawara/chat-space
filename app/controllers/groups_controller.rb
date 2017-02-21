@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :group_find, only: [:show, :edit, :update, :destroy]
+  before_action :group_find, only: %i(show edit update destroy)
 
   def index
     @groups = current_user.groups
