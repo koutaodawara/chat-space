@@ -1,9 +1,9 @@
-=link_to group_chats_path(group.id) do
+= link_to group_chats_path(group) do
   %li.chat-group.chat-group__link
     %p.chat-group__name
-      = group.name
+      = group.try(:name)
     .chat-group__message
       - if group.chats.blank?
-        %p まだメッセージがありません
+        %p まだメッセージはありません
       -else
-        = group.chats.last.text
+        = group.chats.last.try(:text)
